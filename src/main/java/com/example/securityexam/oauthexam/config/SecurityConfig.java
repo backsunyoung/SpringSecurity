@@ -52,9 +52,12 @@ public class SecurityConfig {
                         )
                         .successHandler(customOAuth2AuthenticationSeuucessHandler)
                 )
-                .logout(Customizer.withDefaults()
-
-                );
+                .logout(logout->logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll());
 
 
 //                .formLogin(form -> form

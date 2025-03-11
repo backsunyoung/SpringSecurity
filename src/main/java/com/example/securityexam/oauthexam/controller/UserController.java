@@ -8,6 +8,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import com.example.securityexam.oauthexam.service.UserService;
@@ -86,29 +87,32 @@ public class UserController {
 
 
     @GetMapping("/info")
-    public String info(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model){
-        model.addAttribute("user", customUserDetails);
+    public String info(@AuthenticationPrincipal Object customUserDetails, Model model){
+// CustomUserDetails customUserDetails
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user",principal);
+        //model.addAttribute("user", customUserDetails);
 
         return "oauth/info";
     }
 
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            request.logout(); // 강제 로그아웃 처리
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
-
-
-        Cookie cookie = new Cookie("JSESSIONID", null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        return "redirect:/";
-
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpServletRequest request, HttpServletResponse response) {
+//        try {
+//            request.logout(); // 강제 로그아웃 처리
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        Cookie cookie = new Cookie("JSESSIONID", null);
+//        cookie.setMaxAge(0);
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+//        return "redirect:/";
+//
+//    }
 
 
 }
