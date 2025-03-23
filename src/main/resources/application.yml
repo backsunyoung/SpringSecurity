@@ -1,0 +1,71 @@
+spring:
+  application:
+    name : securityexam
+
+#  security:
+#    user:
+#      name: bsy
+#      password: 1234
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Iv23li3SUXwTNBYnA1W7
+            client-secret: 7442af46e1a4d54963ffc3fcf0554c82b72fd314
+            scope:
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            client-name: GitHub
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+            user-name-attribute: id
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpadb
+    username: chill
+    password: chill
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+
+  spring:
+    devtools:
+      restart:
+        enabled: true
+
+server:
+  port: 9000  # ??? ?? ???
+#  tomcat:
+#    max-threads: 200 # 동시에 요청할 수 있느 ㄴ 최대 수
+#    min-spare-thread: 10 # 항상 유지할 최소 대기 스레드 수
+
+
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: TRACE
+
+
+
+jwt:
+  secretKey: 12345678901234567890123456789012
+  refreshKey: 12345678901234567890123456789012
+
+
+
+

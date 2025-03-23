@@ -1,0 +1,75 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'application'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+
+	//
+	// jwt & json
+	// jwts
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+	//gson - json 메시지를 다루기 위한 라이브러리
+	implementation 'com.google.code.gson:gson'
+
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+
+
+
+
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+
+application {
+	mainClassName = 'com.example.securityexam.jwtexam.test.JwtApplication'  // 적절한 클래스 이름으로 변경
+}
+// C:\자바스프링\securityexam\securityexam\src\main\java\com\example\securityexam\jwtexam\test\JwtApplication.java
